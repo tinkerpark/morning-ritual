@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Journal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Times', 'Times New Roman', serif;
+            background: #1a1a1a;
+            color: #f5f5f5;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* Subtle grid background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 420px;
+            margin: 0 auto;
+            padding: 60px 30px 40px;
+        }
+        
+        .masthead {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+        }
+        
+        .masthead::after {
+            content: '';
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 1px;
+            background: #4facfe;
+            box-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
+        }
+        
+        .title {
+            font-size: 42px;
+            font-weight: 300;
+            letter-spacing: 8px;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+        
+        .subtitle {
+            font-size: 13px;
+            letter-spacing: 3px;
+            color: #888;
+            font-weight: 300;
+            text-transform: uppercase;
+        }
+        
+        .question-block {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+            border: 1px solid #333;
+            border-radius: 2px;
+            padding: 32px 28px;
+            margin-bottom: 24px;
+            position: relative;
+            box-shadow: 
+                0 8px 32px rgba(0,0,0,0.4),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .question-block:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 12px 40px rgba(0,0,0,0.5),
+                inset 0 1px 0 rgba(255,255,255,0.15);
+        }
+        
+        .question-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #4facfe, #00f2fe, #4facfe);
+            background-size: 200% 100%;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { background-position: 200% 0; }
+            50% { background-position: -200% 0; }
+        }
+        
+        .category-label {
+            font-size: 10px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #4facfe;
+            margin-bottom: 16px;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+        
+        .question-text {
+            font-size: 18px;
+            line-height: 1.4;
+            color: #f5f5f5;
+            font-weight: 300;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .generate-section {
+            text-align: center;
+            margin-top: 60px;
+            position: relative;
+        }
+        
+        .generate-btn {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border: none;
+            color: #1a1a1a;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            padding: 20px 50px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            box-shadow: 
+                0 8px 25px rgba(79, 172, 254, 0.3),
+                inset 0 1px 0 rgba(255,255,255,0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .generate-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .generate-btn:hover::before {
+            left: 100%;
+        }
+        
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 12px 35px rgba(79, 172, 254, 0.4),
+                inset 0 1px 0 rgba(255,255,255,0.3);
+        }
+        
+        .generate-btn:active {
+            transform: translateY(0);
+        }
+        
+        .tagline {
+            font-size: 11px;
+            color: #666;
+            margin-top: 30px;
+            letter-spacing: 2px;
+            font-style: italic;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 40px 25px 30px;
+            }
+            
+            .title {
+                font-size: 32px;
+                letter-spacing: 6px;
+            }
+            
+            .question-block {
+                padding: 24px 20px;
+            }
+            
+            .question-text {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="masthead">
+            <h1 class="title">MORNING<br>RITUAL</h1>
+            <p class="subtitle">Three Questions</p>
+        </div>
+        
+        <div class="question-block">
+            <div class="category-label">Focus</div>
+            <div class="question-text" id="goal-question">What will you create today?</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="category-label">Momentum</div>
+            <div class="question-text" id="momentum-question">What fills you with gratitude?</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="category-label">Vision</div>
+            <div class="question-text" id="creative-question">What does your intuition whisper?</div>
+        </div>
+        
+        <div class="generate-section">
+            <button class="generate-btn" onclick="generateQuestions()">
+                REVEAL
+            </button>
+            <p class="tagline">Begin with intention</p>
+        </div>
+    </div>
+
+    <script>
+        const questions = {
+            goal: [
+                "What's one specific thing I'll accomplish today on my project?",
+                "What's the smallest step I can take today to move forward?",
+                "What decision am I avoiding, and why?",
+                "What would success look like by the end of today?",
+                "What's the most important thing I need to focus on right now?",
+                "What obstacle can I turn into an opportunity today?"
+            ],
+            momentum: [
+                "What went well yesterday?",
+                "Who has supported me recently, and how?",
+                "What process am I enjoying right now?",
+                "What skill have I strengthened this week?",
+                "What am I most grateful for in this moment?",
+                "What progress have I made that I haven't celebrated yet?"
+            ],
+            creative: [
+                "What part of my current work excites me most?",
+                "When did I last feel truly confident about my path?",
+                "What would I tell a fellow creator facing my current challenge?",
+                "What does my intuition know that my mind hasn't accepted yet?",
+                "What would I create if I knew I couldn't fail?",
+                "What story is trying to emerge through my work?"
+            ]
+        };
+
+        function getRandomQuestion(category) {
+            const categoryQuestions = questions[category];
+            const randomIndex = Math.floor(Math.random() * categoryQuestions.length);
+            return categoryQuestions[randomIndex];
+        }
+
+        function generateQuestions() {
+            // Add subtle animation delay between questions
+            setTimeout(() => {
+                document.getElementById('goal-question').textContent = getRandomQuestion('goal');
+            }, 100);
+            
+            setTimeout(() => {
+                document.getElementById('momentum-question').textContent = getRandomQuestion('momentum');
+            }, 200);
+            
+            setTimeout(() => {
+                document.getElementById('creative-question').textContent = getRandomQuestion('creative');
+            }, 300);
+        }
+
+        // Generate initial questions on page load
+        window.onload = function() {
+            generateQuestions();
+        };
+    </script>
+</body>
+</html>
