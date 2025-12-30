@@ -12,239 +12,198 @@
         }
         
         body {
-            font-family: 'Times', 'Times New Roman', serif;
-            background: #2a2a2a;
-            color: #e8e8e8;
+            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: #e8e6e1;
+            color: #1a1a1a;
             overflow-x: hidden;
             min-height: 100vh;
-            position: relative;
-        }
-        
-        /* Organic paper texture */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(255,255,255,0.02) 1px, transparent 1px),
-                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.015) 1px, transparent 1px),
-                radial-gradient(circle at 40% 80%, rgba(255,255,255,0.01) 1px, transparent 1px);
-            background-size: 30px 30px, 40px 40px, 50px 50px;
-            pointer-events: none;
-            z-index: 0;
+            padding: 0;
         }
         
         .container {
-            position: relative;
-            z-index: 1;
-            max-width: 420px;
+            max-width: 428px;
             margin: 0 auto;
-            padding: 60px 30px 40px;
+            min-height: 100vh;
+            background: #e8e6e1;
         }
         
-        .masthead {
-            text-align: center;
-            margin-bottom: 80px;
+        .header {
+            padding: 60px 24px 40px;
             position: relative;
-        }
-        
-        .masthead::after {
-            content: '';
-            position: absolute;
-            bottom: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 1px;
-            background: #6b8cae;
-            box-shadow: 0 0 10px rgba(107, 140, 174, 0.3);
         }
         
         .title {
-            font-size: 32px;
-            font-weight: 300;
-            letter-spacing: 8px;
-            margin-bottom: 16px;
-            background: linear-gradient(135deg, #6b8cae, #8fa4c0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-transform: uppercase;
+            font-size: 34px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
             line-height: 1.1;
+            color: #1a1a1a;
+            margin-bottom: 4px;
         }
         
         .subtitle {
-            font-size: 13px;
-            letter-spacing: 3px;
-            color: #888;
-            font-weight: 300;
-            text-transform: uppercase;
+            font-size: 17px;
+            font-weight: 400;
+            color: #666;
+            letter-spacing: 0;
         }
         
-        .question-block {
-            background: linear-gradient(135deg, #3a3a3a 0%, #323232 100%);
-            border: 1px solid #4a4a4a;
-            border-radius: 2px;
-            padding: 40px 32px;
-            margin-bottom: 24px;
-            position: relative;
-            box-shadow: 
-                0 8px 32px rgba(0,0,0,0.3),
-                inset 0 1px 0 rgba(255,255,255,0.05);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .dots-decoration {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            padding: 32px 24px 24px;
+            max-width: 280px;
+            margin: 0 auto;
         }
         
-        .question-block:hover {
-            transform: translateY(-2px);
-            box-shadow: 
-                0 12px 40px rgba(0,0,0,0.4),
-                inset 0 1px 0 rgba(255,255,255,0.08);
+        .dot {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #d0cdc7;
+            transition: all 0.3s ease;
         }
         
-        .question-block::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #6b8cae, #8fa4c0, #6b8cae);
-            background-size: 200% 100%;
-            animation: shimmer 3s ease-in-out infinite;
+        .dot.active {
+            background: #1a1a1a;
+            transform: scale(1.05);
         }
         
-        @keyframes shimmer {
-            0%, 100% { background-position: 200% 0; }
-            50% { background-position: -200% 0; }
+        .content {
+            padding: 0 24px 40px;
+        }
+        
+        .question-card {
+            background: #f5f4f0;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            border: 1px solid #d0cdc7;
+            transition: all 0.2s ease;
+        }
+        
+        .question-card:active {
+            transform: scale(0.99);
+        }
+        
+        .category-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #1a1a1a;
+            margin-bottom: 12px;
         }
         
         .category-label {
             font-size: 13px;
-            font-weight: 500;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #6b8cae;
-            margin-bottom: 16px;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            letter-spacing: 0.5px;
+            color: #666;
+            margin-bottom: 12px;
         }
         
         .question-text {
-            font-size: 18px;
+            font-size: 17px;
             line-height: 1.4;
-            color: #e8e8e8;
-            font-weight: 300;
-            min-height: 50px;
+            color: #1a1a1a;
+            font-weight: 400;
+            min-height: 48px;
             display: flex;
             align-items: center;
         }
         
         .generate-section {
-            text-align: center;
-            margin-top: 60px;
-            position: relative;
+            padding: 24px 24px 40px;
         }
         
         .generate-btn {
-            background: linear-gradient(135deg, #6b8cae 0%, #8fa4c0 100%);
+            width: 100%;
+            background: #1a1a1a;
             border: none;
-            color: #1a1a1a;
-            font-size: 13px;
+            color: #e8e6e1;
+            font-size: 17px;
             font-weight: 600;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            padding: 20px 50px;
+            letter-spacing: 0;
+            padding: 18px;
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            box-shadow: 
-                0 8px 25px rgba(107, 140, 174, 0.2),
-                inset 0 1px 0 rgba(255,255,255,0.2);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .generate-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s ease;
-        }
-        
-        .generate-btn:hover::before {
-            left: 100%;
-        }
-        
-        .generate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 
-                0 12px 35px rgba(107, 140, 174, 0.25),
-                inset 0 1px 0 rgba(255,255,255,0.3);
+            border-radius: 12px;
+            transition: all 0.2s ease;
         }
         
         .generate-btn:active {
-            transform: translateY(0);
+            transform: scale(0.98);
+            background: #2a2a2a;
         }
         
         .tagline {
-            font-size: 11px;
-            color: #666;
-            margin-top: 30px;
-            letter-spacing: 2px;
-            font-style: italic;
+            text-align: center;
+            font-size: 13px;
+            color: #999;
+            margin-top: 16px;
+            letter-spacing: 0;
         }
         
         @media (max-width: 480px) {
-            .container {
-                padding: 40px 25px 30px;
+            .header {
+                padding: 50px 20px 32px;
             }
             
             .title {
-                font-size: 32px;
-                letter-spacing: 6px;
+                font-size: 28px;
             }
             
-            .question-block {
-                padding: 24px 20px;
+            .content {
+                padding: 0 20px 32px;
             }
             
-            .question-text {
-                font-size: 16px;
+            .question-card {
+                padding: 20px;
+            }
+            
+            .dots-decoration {
+                padding: 24px 20px 20px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="masthead">
-            <h1 class="title">INTENTION<br>JOURNAL</h1>
+        <div class="header">
+            <h1 class="title">Intention<br>Journal</h1>
             <p class="subtitle">Three Questions</p>
         </div>
         
-        <div class="question-block">
-            <div class="category-label">Focus</div>
-            <div class="question-text" id="goal-question">What will you create today?</div>
+        <div class="dots-decoration" id="dots">
+            <!-- Dots will be generated here -->
         </div>
         
-        <div class="question-block">
-            <div class="category-label">Momentum</div>
-            <div class="question-text" id="momentum-question">What fills you with gratitude?</div>
-        </div>
-        
-        <div class="question-block">
-            <div class="category-label">Vision</div>
-            <div class="question-text" id="creative-question">What does your intuition whisper?</div>
+        <div class="content">
+            <div class="question-card">
+                <div class="category-dot"></div>
+                <div class="category-label">Focus</div>
+                <div class="question-text" id="goal-question">What will you create today?</div>
+            </div>
+            
+            <div class="question-card">
+                <div class="category-dot"></div>
+                <div class="category-label">Momentum</div>
+                <div class="question-text" id="momentum-question">What fills you with gratitude?</div>
+            </div>
+            
+            <div class="question-card">
+                <div class="category-dot"></div>
+                <div class="category-label">Vision</div>
+                <div class="question-text" id="creative-question">What does your intuition whisper?</div>
+            </div>
         </div>
         
         <div class="generate-section">
             <button class="generate-btn" onclick="generateQuestions()">
-                REVEAL
+                Reveal
             </button>
             <p class="tagline">Begin with intention</p>
         </div>
@@ -253,59 +212,108 @@
     <script>
         const questions = {
             goal: [
-                "What's one specific thing I'll accomplish today on my project?",
-                "What's the smallest step I can take today to move forward?",
+                "What's one thing I'll accomplish today?",
+                "What's the smallest step I can take right now?",
                 "What decision am I avoiding, and why?",
-                "What would success look like by the end of today?",
-                "What's the most important thing I need to focus on right now?",
-                "What obstacle can I turn into an opportunity today?",
-                "Where do I want to focus my time and energy?",
+                "What would a good day look like?",
+                "Where do I want to focus my attention today?",
+                "What obstacle can I transform into opportunity?",
+                "Where can I bring more presence?",
                 "Where can I be more consistent?",
-                "What changes or improvements do I need to make?",
-                "How can I be a better leader today?",
-                "How can I ask for help when I need it?",
-                "What would I do today if I knew I wouldn't fail?",
-                "What am I calling into my life right now?",
+                "What needs my attention right now?",
+                "How can I serve others today?",
+                "How can I ask for what I need?",
+                "What would I do if I trusted myself completely?",
+                "What am I ready to receive?",
                 "What version of myself am I becoming?",
-                "What opportunity is seeking me out?",
-                "What abundance am I ready to receive?",
-                "What legacy am I creating with today's actions?"
+                "What is seeking to emerge through me?",
+                "What path is opening before me?",
+                "What am I creating with today's choices?",
+                "What small truth can I tell today?",
+                "Where can I practice courage?",
+                "What work am I avoiding that calls to me?",
+                "How can I move from thinking to doing?",
+                "What does this moment require of me?",
+                "Where am I holding back, and why?",
+                "What would change if I stopped trying so hard?",
+                "What ordinary task deserves my full attention today?"
             ],
             momentum: [
                 "What went well yesterday?",
-                "Who has supported me recently, and how?",
-                "What process am I enjoying right now?",
-                "What skill have I strengthened this week?",
-                "What am I most grateful for in this moment?",
-                "What progress have I made that I haven't celebrated yet?",
-                "What habit is working well for me?",
-                "What am I grateful for today?",
+                "Who has shown up for me recently?",
+                "What am I enjoying about my life right now?",
+                "What strength have I discovered lately?",
+                "What am I grateful for in this moment?",
+                "What progress deserves recognition?",
+                "What practice is serving me well?",
+                "What fills me with gratitude today?",
                 "What am I looking forward to?",
-                "What makes me smile right now?",
+                "What brings me joy right now?",
                 "Who inspires me and why?",
-                "What positive truth would I tell my younger self?",
-                "What energy am I attracting into my life?",
+                "What would I tell my younger self?",
+                "What goodness is flowing into my life?",
                 "What positive momentum am I building?",
-                "What gifts am I discovering within myself?",
-                "What support is flowing toward me?",
-                "What victories am I ready to celebrate?"
+                "What gifts am I discovering in myself?",
+                "What support surrounds me?",
+                "What deserves celebration?",
+                "What synchronicity have I noticed lately?",
+                "What unexpected gift arrived this week?",
+                "What makes me feel most alive?",
+                "What have I learned by showing up?",
+                "What courage have I demonstrated recently?",
+                "What simple pleasure did I almost miss?",
+                "Where have I grown without noticing?",
+                "What ordinary moment held extraordinary beauty?"
             ],
             creative: [
-                "What part of my current work excites me most?",
-                "When did I last feel truly confident about my path?",
-                "What would I tell a fellow creator facing my current challenge?",
-                "What does my intuition know that my mind hasn't accepted yet?",
-                "What story is trying to emerge through my work?",
-                "What do I need more of in my life?",
-                "What do I need less of in my life?",
-                "What can I let go of today?",
-                "What vision is calling me forward?",
-                "What creative breakthrough is waiting for me?",
-                "What message wants to flow through my work?",
-                "What impossible thing is becoming possible?",
-                "What magic am I ready to create today?"
+                "What part of my life feels most alive right now?",
+                "When did I last feel truly aligned with my path?",
+                "What would I tell someone facing my current challenge?",
+                "What does my inner voice know that my thinking mind resists?",
+                "What wants to be expressed through my life?",
+                "What do I need more of?",
+                "What do I need less of?",
+                "What am I ready to release?",
+                "What possibility is calling to me?",
+                "What breakthrough is waiting to happen?",
+                "What wants to flow through me today?",
+                "What seems impossible but feels true?",
+                "What am I here to create or contribute?",
+                "What would I make if no one were watching?",
+                "What truth am I circling around?",
+                "Where is my vision clearer than my execution?",
+                "What am I noticing that others might miss?",
+                "What rough draft needs permission to exist?",
+                "What is trying to teach me right now?",
+                "Where am I confusing perfection with completion?",
+                "What wants my attention but not my judgment?",
+                "What have I been gathering without knowing why?",
+                "What does the natural world want to show me today?",
+                "Where is flow trying to happen?",
+                "What story is ready to be told?"
             ]
         };
+
+        // Generate decorative dots
+        function generateDots() {
+            const dotsContainer = document.getElementById('dots');
+            const pattern = [
+                0,0,0,0,0,0,0,
+                0,1,1,0,0,0,0,
+                0,0,0,0,0,0,0,
+                0,0,0,0,0,1,1,
+                1,1,0,0,0,0,0,
+                0,0,0,1,1,1,0,
+                1,1,0,0,0,0,0,
+                0,0,0,0,1,1,0
+            ];
+            
+            pattern.forEach(val => {
+                const dot = document.createElement('div');
+                dot.className = val === 1 ? 'dot active' : 'dot';
+                dotsContainer.appendChild(dot);
+            });
+        }
 
         function getRandomQuestion(category) {
             const categoryQuestions = questions[category];
@@ -314,22 +322,14 @@
         }
 
         function generateQuestions() {
-            // Add subtle animation delay between questions
-            setTimeout(() => {
-                document.getElementById('goal-question').textContent = getRandomQuestion('goal');
-            }, 100);
-            
-            setTimeout(() => {
-                document.getElementById('momentum-question').textContent = getRandomQuestion('momentum');
-            }, 200);
-            
-            setTimeout(() => {
-                document.getElementById('creative-question').textContent = getRandomQuestion('creative');
-            }, 300);
+            document.getElementById('goal-question').textContent = getRandomQuestion('goal');
+            document.getElementById('momentum-question').textContent = getRandomQuestion('momentum');
+            document.getElementById('creative-question').textContent = getRandomQuestion('creative');
         }
 
-        // Generate initial questions on page load
+        // Initialize
         window.onload = function() {
+            generateDots();
             generateQuestions();
         };
     </script>
