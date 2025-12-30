@@ -170,15 +170,6 @@
             background: #2a2a2a;
         }
         
-        .tagline {
-            text-align: center;
-            font-size: 13px;
-            font-weight: 400;
-            color: #999;
-            margin-top: 16px;
-            letter-spacing: 0;
-        }
-        
         @media (max-width: 414px) {
             .container {
                 padding: 0 24px;
@@ -202,7 +193,7 @@
     <div class="container">
         <div class="header">
             <h1 class="title">Intention<br>Journal</h1>
-            <p class="subtitle">Three Questions</p>
+            <p class="subtitle">Begin with intention</p>
             
             <div class="dot-matrix-legend">
                 <div class="matrix-grid" id="matrix"></div>
@@ -254,7 +245,6 @@
                     <div class="btn-dot"></div>
                 </div>
             </button>
-            <p class="tagline">Begin with intention</p>
         </div>
     </div>
 
@@ -343,6 +333,13 @@
             ]
         };
 
+        // Track previously shown questions to ensure all three change
+        let previousQuestions = {
+            goal: null,
+            momentum: null,
+            creative: null
+        };
+
         function generateMatrix() {
             const matrix = document.getElementById('matrix');
             // 3 rows x 6 columns = 18 dots
@@ -365,8 +362,16 @@
 
         function getRandomQuestion(category) {
             const categoryQuestions = questions[category];
-            const randomIndex = Math.floor(Math.random() * categoryQuestions.length);
-            return categoryQuestions[randomIndex];
+            let newQuestion;
+            
+            // Keep trying until we get a different question than the previous one
+            do {
+                const randomIndex = Math.floor(Math.random() * categoryQuestions.length);
+                newQuestion = categoryQuestions[randomIndex];
+            } while (newQuestion === previousQuestions[category]);
+            
+            previousQuestions[category] = newQuestion;
+            return newQuestion;
         }
 
         function generateQuestions() {
