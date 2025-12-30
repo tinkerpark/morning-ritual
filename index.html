@@ -12,7 +12,7 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
             background: #e8e6e1;
             color: #1a1a1a;
             overflow-x: hidden;
@@ -21,24 +21,24 @@
         }
         
         .container {
-            max-width: 428px;
+            max-width: 390px;
             margin: 0 auto;
             min-height: 100vh;
             background: #e8e6e1;
+            padding: 0 32px;
         }
         
         .header {
-            padding: 60px 24px 40px;
-            position: relative;
+            padding: 64px 0 48px;
         }
         
         .title {
             font-size: 34px;
             font-weight: 700;
             letter-spacing: -0.5px;
-            line-height: 1.1;
+            line-height: 1.15;
             color: #1a1a1a;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
         
         .subtitle {
@@ -48,74 +48,69 @@
             letter-spacing: 0;
         }
         
-        .dots-decoration {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
+        .dot-legend {
+            padding: 40px 0 32px;
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
             gap: 8px;
-            padding: 32px 24px 24px;
-            max-width: 280px;
-            margin: 0 auto;
         }
         
-        .dot {
-            width: 32px;
-            height: 32px;
+        .legend-dot {
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            background: #d0cdc7;
-            transition: all 0.3s ease;
+            background: #1a1a1a;
         }
         
-        .dot.active {
-            background: #1a1a1a;
-            transform: scale(1.05);
+        .legend-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: #666;
+            letter-spacing: 0.2px;
         }
         
         .content {
-            padding: 0 24px 40px;
+            padding: 0 0 32px;
         }
         
         .question-card {
             background: #f5f4f0;
             border-radius: 16px;
-            padding: 24px;
+            padding: 28px 24px;
             margin-bottom: 16px;
-            border: 1px solid #d0cdc7;
-            transition: all 0.2s ease;
+            border: 1px solid #d8d6d0;
+            position: relative;
         }
         
-        .question-card:active {
-            transform: scale(0.99);
+        .dots-pattern {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 20px;
         }
         
-        .category-dot {
-            width: 8px;
-            height: 8px;
+        .pattern-dot {
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             background: #1a1a1a;
-            margin-bottom: 12px;
-        }
-        
-        .category-label {
-            font-size: 13px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #666;
-            margin-bottom: 12px;
         }
         
         .question-text {
             font-size: 17px;
-            line-height: 1.4;
+            line-height: 1.5;
             color: #1a1a1a;
             font-weight: 400;
-            min-height: 48px;
-            display: flex;
-            align-items: center;
+            letter-spacing: -0.2px;
         }
         
         .generate-section {
-            padding: 24px 24px 40px;
+            padding: 16px 0 48px;
         }
         
         .generate-btn {
@@ -126,10 +121,8 @@
             font-size: 17px;
             font-weight: 600;
             letter-spacing: 0;
-            padding: 18px;
+            padding: 17px;
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
             border-radius: 12px;
             transition: all 0.2s ease;
         }
@@ -142,30 +135,27 @@
         .tagline {
             text-align: center;
             font-size: 13px;
+            font-weight: 400;
             color: #999;
             margin-top: 16px;
             letter-spacing: 0;
         }
         
-        @media (max-width: 480px) {
+        @media (max-width: 414px) {
+            .container {
+                padding: 0 24px;
+            }
+            
             .header {
-                padding: 50px 20px 32px;
+                padding: 56px 0 40px;
             }
             
             .title {
-                font-size: 28px;
+                font-size: 32px;
             }
             
-            .content {
-                padding: 0 20px 32px;
-            }
-            
-            .question-card {
-                padding: 20px;
-            }
-            
-            .dots-decoration {
-                padding: 24px 20px 20px;
+            .dot-legend {
+                gap: 24px;
             }
         }
     </style>
@@ -177,26 +167,43 @@
             <p class="subtitle">Three Questions</p>
         </div>
         
-        <div class="dots-decoration" id="dots">
-            <!-- Dots will be generated here -->
+        <div class="dot-legend">
+            <div class="legend-item">
+                <div class="legend-dot"></div>
+                <span class="legend-label">Focus</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot"></div>
+                <span class="legend-label">Momentum</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot"></div>
+                <span class="legend-label">Vision</span>
+            </div>
         </div>
         
         <div class="content">
             <div class="question-card">
-                <div class="category-dot"></div>
-                <div class="category-label">Focus</div>
+                <div class="dots-pattern">
+                    <div class="pattern-dot"></div>
+                </div>
                 <div class="question-text" id="goal-question">What will you create today?</div>
             </div>
             
             <div class="question-card">
-                <div class="category-dot"></div>
-                <div class="category-label">Momentum</div>
+                <div class="dots-pattern">
+                    <div class="pattern-dot"></div>
+                    <div class="pattern-dot"></div>
+                </div>
                 <div class="question-text" id="momentum-question">What fills you with gratitude?</div>
             </div>
             
             <div class="question-card">
-                <div class="category-dot"></div>
-                <div class="category-label">Vision</div>
+                <div class="dots-pattern">
+                    <div class="pattern-dot"></div>
+                    <div class="pattern-dot"></div>
+                    <div class="pattern-dot"></div>
+                </div>
                 <div class="question-text" id="creative-question">What does your intuition whisper?</div>
             </div>
         </div>
@@ -294,27 +301,6 @@
             ]
         };
 
-        // Generate decorative dots
-        function generateDots() {
-            const dotsContainer = document.getElementById('dots');
-            const pattern = [
-                0,0,0,0,0,0,0,
-                0,1,1,0,0,0,0,
-                0,0,0,0,0,0,0,
-                0,0,0,0,0,1,1,
-                1,1,0,0,0,0,0,
-                0,0,0,1,1,1,0,
-                1,1,0,0,0,0,0,
-                0,0,0,0,1,1,0
-            ];
-            
-            pattern.forEach(val => {
-                const dot = document.createElement('div');
-                dot.className = val === 1 ? 'dot active' : 'dot';
-                dotsContainer.appendChild(dot);
-            });
-        }
-
         function getRandomQuestion(category) {
             const categoryQuestions = questions[category];
             const randomIndex = Math.floor(Math.random() * categoryQuestions.length);
@@ -327,9 +313,7 @@
             document.getElementById('creative-question').textContent = getRandomQuestion('creative');
         }
 
-        // Initialize
         window.onload = function() {
-            generateDots();
             generateQuestions();
         };
     </script>
